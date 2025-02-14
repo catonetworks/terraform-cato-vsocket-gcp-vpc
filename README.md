@@ -27,7 +27,7 @@ This module deploys the following resources
 ```hcl
 # GCP/Cato vsocket Module
 module "vsocket-gcp-vpc" {
-  source                   = "../../../terraform-cato-vsocket-gcp-vpc"
+  source                   = "catonetworks/vsocket-gcp-vpc/cato"
   token                    = var.cato_token
   account_id               = var.account_id
   # GCP Project configuration
@@ -55,28 +55,28 @@ module "vsocket-gcp-vpc" {
   # mgmt network configuration
   ip_mgmt_name             = "ba-mgmt-ip"
   mgmt_network_ip          = "10.0.0.10"
-  subnet_mgmt_name         = "ba-mgmt-subnet"
+  subnet_mgmt_name         = "mgmt-subnet"
   subnet_mgmt_cidr         = "10.0.0.0/24"
-  vpc_mgmt_name            = "ba-management-vpc"
+  vpc_mgmt_name            = "management-vpc"
 
   # wan network configuration
-  ip_wan_name              = "ba-wan-ip"
+  ip_wan_name              = "wan-ip"
   wan_network_ip           = "10.1.0.10"
-  subnet_wan_name          = "ba-wan-subnet"
+  subnet_wan_name          = "wan-subnet"
   subnet_wan_cidr          = "10.1.0.0/24"
   vpc_wan_name             = "ba-wan-vpc"
 
   # lan network configuration
   lan_network_ip           = "10.2.0.10" 
-  subnet_lan_name          = "ba-lan-subnet"
+  subnet_lan_name          = "lan-subnet"
   subnet_lan_cidr          = "10.2.0.0/24"
-  vpc_lan_name             = "ba-lan-vpc"
+  vpc_lan_name             = "lan-vpc"
 
   # GCP deployment tags and labels
-  tags                     = ["test1", "test2"]
+  tags                     = ["exampletag1", "exampletag2"]
   labels = {
-    test1 = "test1"
-    test2 = "test2"
+    examplelabel1 = "exampleval1"
+    examplelabel2 = "examplelabel2"
   }
 }
 ```
