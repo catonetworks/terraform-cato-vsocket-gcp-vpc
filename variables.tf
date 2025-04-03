@@ -211,3 +211,9 @@ variable "tags" {
   type        = list(string)
   default     = []
 }
+
+variable "create_lan_default_route" {
+  description = "Whether to create a default route in the LAN VPC pointing to the vSocket instance"
+  type        = bool
+  default     = false
+}

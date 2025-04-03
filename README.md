@@ -71,6 +71,7 @@ module "vsocket-gcp-vpc" {
   subnet_lan_name          = "lan-subnet"
   subnet_lan_cidr          = "10.2.0.0/24"
   vpc_lan_name             = "lan-vpc"
+  create_lan_default_route = true  # Optional: Create a default route in LAN VPC pointing to vSocket instance
 
   # GCP deployment tags and labels
   tags                     = ["exampletag1", "exampletag2"]

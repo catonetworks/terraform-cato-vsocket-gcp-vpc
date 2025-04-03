@@ -96,3 +96,13 @@ module "vsocket-gcp" {
   labels                   = var.labels
 }
 
+# LAN Default Route
+resource "google_compute_route" "lan_default_route" {
+  count            = var.create_lan_default_route ? 1 : 0
+  name             = "route-all-lan-to-${var.vm_name}"
+  dest_range       = "0.0.0.0/0"
+  network         = google_compute_network.vpc_lan.id
+  next_hop_instance = module.vsocket-gcp.instance_id
+  priority        = 1000
+}
+
