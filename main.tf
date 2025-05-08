@@ -1,9 +1,3 @@
-# Provider configuration
-provider "google" {
-  project      = var.project
-  region       = var.region
-}
-
 # VPC Networks
 resource "google_compute_network" "vpc_mgmt" {
   name                    = var.vpc_mgmt_name
@@ -65,9 +59,7 @@ resource "google_compute_address" "ip_lan" {
 }
 
 module "vsocket-gcp" {
-  source                   = "catonetworks/vsocket-gcp/cato"  
-  token                    = var.token
-  account_id               = var.account_id
+  source                   = "catonetworks/vsocket-gcp/cato"
   allowed_ports            = var.allowed_ports
   boot_disk_size           = var.boot_disk_size
   create_firewall_rule     = var.create_firewall_rule
@@ -81,8 +73,6 @@ module "vsocket-gcp" {
   mgmt_network_ip          = var.mgmt_network_ip
   mgmt_static_ip_address   = google_compute_address.ip_mgmt[0].address
   mgmt_subnet_id           = google_compute_subnetwork.subnet_mgmt.id
-  project                  = var.project
-  region                   = var.region
   vm_name                  = var.vm_name
   wan_compute_network_id   = google_compute_network.vpc_wan.id
   wan_network_ip           = var.wan_network_ip
@@ -94,15 +84,17 @@ module "vsocket-gcp" {
   site_location            = var.site_location
   tags                     = var.tags
   labels                   = var.labels
+  license_id               = var.license_id
+  license_bw               = var.license_bw
 }
 
 # LAN Default Route
 resource "google_compute_route" "lan_default_route" {
-  count            = var.create_lan_default_route ? 1 : 0
-  name             = "route-all-lan-to-${var.vm_name}"
-  dest_range       = "0.0.0.0/0"
-  network         = google_compute_network.vpc_lan.id
+  count             = var.create_lan_default_route ? 1 : 0
+  name              = "route-all-lan-to-${var.vm_name}"
+  dest_range        = "0.0.0.0/0"
+  network           = google_compute_network.vpc_lan.id
   next_hop_instance = module.vsocket-gcp.instance_id
-  priority        = 1000
+  priority          = 1000
 }
 

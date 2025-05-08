@@ -9,3 +9,8 @@
 
 ### Features
 - Updated readme docs
+
+## 0.0.4 (2025-05-07)
+
+### Features
+- Added optional license resource and inputs used for commercial site deployments
