@@ -50,7 +50,8 @@ module "vsocket-gcp-vpc" {
   allowed_ports            = ["22", "443"]
   create_firewall_rule     = true
   # Firewall configuration
-  firewall_rule_name       = "allow-management-access"
+  wan_firewall_rule_name       = "allow-management-access"
+  lan_firewall_rule_name       = "allow-cato-access"
   management_source_ranges = ["11.22.33.44/32"]
 
   # mgmt network configuration
