@@ -36,10 +36,5 @@ output "ip_lan_address" {
 }
 
 output "cato_license_site" {
-  value = var.license_id == null ? null : {
-    id           = cato_license.license[0].id
-    license_id   = cato_license.license[0].license_id
-    license_info = cato_license.license[0].license_info
-    site_id      = cato_license.license[0].site_id
-  }
+ value = module.vsocket-gcp.cato_license_site
 }

@@ -59,11 +59,13 @@ resource "google_compute_address" "ip_lan" {
 }
 
 module "vsocket-gcp" {
-  source                   = "catonetworks/vsocket-gcp/cato"
+  # source                   = "catonetworks/vsocket-gcp/cato"
+  source = "../terraform-cato-vsocket-gcp"
   allowed_ports            = var.allowed_ports
   boot_disk_size           = var.boot_disk_size
   create_firewall_rule     = var.create_firewall_rule
-  firewall_rule_name       = var.firewall_rule_name
+  wan_firewall_rule_name   = var.wan_firewall_rule_name
+  lan_firewall_rule_name   = var.lan_firewall_rule_name
   lan_compute_network_id   = google_compute_network.vpc_lan.id
   lan_network_ip           = var.lan_network_ip
   lan_subnet_id            = google_compute_subnetwork.subnet_lan.id
@@ -73,7 +75,7 @@ module "vsocket-gcp" {
   mgmt_network_ip          = var.mgmt_network_ip
   mgmt_static_ip_address   = google_compute_address.ip_mgmt[0].address
   mgmt_subnet_id           = google_compute_subnetwork.subnet_mgmt.id
-  vm_name                  = var.vm_name
+  # vm_name                  = var.vm_name
   wan_compute_network_id   = google_compute_network.vpc_wan.id
   wan_network_ip           = var.wan_network_ip
   wan_static_ip_address    = google_compute_address.ip_wan[0].address
@@ -94,7 +96,7 @@ resource "google_compute_route" "lan_default_route" {
   name              = "route-all-lan-to-${var.vm_name}"
   dest_range        = "0.0.0.0/0"
   network           = google_compute_network.vpc_lan.id
-  next_hop_instance = module.vsocket-gcp.instance_id
+  next_hop_instance = module.vsocket-gcp.vm_instance_id
   priority          = 1000
 }
 
