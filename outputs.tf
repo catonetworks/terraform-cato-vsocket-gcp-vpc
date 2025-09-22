@@ -36,5 +36,5 @@ output "ip_lan_address" {
 }
 
 output "cato_license_site" {
- value = module.vsocket-gcp.cato_license_site
+  value = module.vsocket-gcp.cato_license_site
 }

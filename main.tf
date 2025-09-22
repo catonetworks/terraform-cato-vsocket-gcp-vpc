@@ -59,8 +59,7 @@ resource "google_compute_address" "ip_lan" {
 }
 
 module "vsocket-gcp" {
-  # source                   = "catonetworks/vsocket-gcp/cato"
-  source = "../terraform-cato-vsocket-gcp"
+  source                   = "catonetworks/vsocket-gcp/cato"
   allowed_ports            = var.allowed_ports
   boot_disk_size           = var.boot_disk_size
   create_firewall_rule     = var.create_firewall_rule
@@ -76,18 +75,18 @@ module "vsocket-gcp" {
   mgmt_static_ip_address   = google_compute_address.ip_mgmt[0].address
   mgmt_subnet_id           = google_compute_subnetwork.subnet_mgmt.id
   # vm_name                  = var.vm_name
-  wan_compute_network_id   = google_compute_network.vpc_wan.id
-  wan_network_ip           = var.wan_network_ip
-  wan_static_ip_address    = google_compute_address.ip_wan[0].address
-  wan_subnet_id            = google_compute_subnetwork.subnet_wan.id
-  zone                     = var.zone
-  site_name                = var.site_name
-  site_description         = var.site_description
-  site_location            = var.site_location
-  tags                     = var.tags
-  labels                   = var.labels
-  license_id               = var.license_id
-  license_bw               = var.license_bw
+  wan_compute_network_id = google_compute_network.vpc_wan.id
+  wan_network_ip         = var.wan_network_ip
+  wan_static_ip_address  = google_compute_address.ip_wan[0].address
+  wan_subnet_id          = google_compute_subnetwork.subnet_wan.id
+  zone                   = var.zone
+  site_name              = var.site_name
+  site_description       = var.site_description
+  site_location          = var.site_location
+  tags                   = var.tags
+  labels                 = var.labels
+  license_id             = var.license_id
+  license_bw             = var.license_bw
 }
 
 # LAN Default Route

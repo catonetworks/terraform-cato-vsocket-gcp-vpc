@@ -14,3 +14,8 @@
 
 ### Features
 - Added optional license resource and inputs used for commercial site deployments
+
+## 0.0.5 (2025-09-22)
+
+### Features
+- Updated outputs and fixed params
